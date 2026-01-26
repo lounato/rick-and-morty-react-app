@@ -1,6 +1,5 @@
 import ReactPaginate from "react-paginate";
 import CharacterList from "../../components/character-list/CharacterList";
-import Navbar from "../../components/navbar/Navbar";
 import { useFavorites } from "../../hooks/useFavorites";
 import useFetch from "../../hooks/useFetch";
 import "./FavoritesPage.scss";
@@ -45,7 +44,6 @@ const FavoritesPage = () => {
 
   return (
     <div className="favoritespage">
-      <Navbar />
       <div className="content">
         <div className="fav__title">
           <h1>My Rick and Morty favourite characters</h1>

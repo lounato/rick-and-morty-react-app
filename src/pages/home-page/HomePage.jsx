@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Navbar from "../../components/navbar/Navbar";
 import "./HomePage.scss";
 import useFetch from "../../hooks/useFetch";
 import CharacterList from "../../components/character-list/CharacterList";
@@ -34,7 +33,6 @@ const HomePage = () => {
 
   return (
     <div className="homepage">
-      <Navbar />
       <div className="content">
         <div className="home__title">
           <h1>Rick and Morty characters</h1>
