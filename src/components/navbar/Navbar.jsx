@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import logo from "../../assets/images/logo.svg";
 import "./Navbar.scss";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -18,16 +18,36 @@ const Navbar = () => {
   return (
     <nav className={`navbar ${scrolled ? "navbar--scrolled" : ""}`}>
       <div className="navbar__content">
-        <Link to="/home">
-          <img src={logo} alt="MyHomeCinema Logo" className="navbar__logo" />
-        </Link>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "navbar__links--active" : ""
+          }
+          to="/home"
+        >
+          <img src={logo} alt="Rick and Morty logo" className="navbar__logo" />
+        </NavLink>
 
         <ul className="navbar__links">
           <li>
-            <Link to="/home">Home</Link>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "navbar__links--active" : ""
+              }
+              to="/home"
+            >
+              Home
+            </NavLink>
           </li>
           <li>
-            <Link to="/favorites">Favorites</Link>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "navbar__links--active" : ""
+              }
+              to="/favorites"
+              end
+            >
+              Favorites
+            </NavLink>
           </li>
         </ul>
       </div>
