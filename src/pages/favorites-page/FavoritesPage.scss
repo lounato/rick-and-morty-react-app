@@ -1,0 +1,51 @@
+.favoritespage {
+  height: 2000px;
+  background-color: #111;
+}
+
+.content {
+  padding: 100px 60px 100px 60px;
+  color: white;
+}
+
+.fav__title {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin-top: 30px;
+  gap: 8px;
+  position: relative; /* o estático */
+  z-index: 10;
+}
+
+.pagination li {
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background-color: #222;
+  color: white;
+  transition: background-color 0.2s ease;
+}
+
+.pagination li a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 8px 12px;
+}
+
+.pagination li:hover {
+  background-color: #555;
+}
+
+.pagination__active {
+  background-color: #ff6f61;
+  font-weight: bold;
+}

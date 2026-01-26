@@ -1,0 +1,39 @@
+.character-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  background-color: #1c1c1c;
+  padding: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.character-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.character-card__avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.character-card__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.character-card__name {
+  margin: 0;
+  color: white;
+  font-size: 16px;
+}
+
+.character-card__planet {
+  margin: 4px 0 0;
+  color: #aaa;
+  font-size: 14px;
+}
