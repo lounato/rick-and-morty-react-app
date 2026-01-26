@@ -24,16 +24,19 @@ const CharacterModal = ({ isOpen, onClose, character }) => {
           <div className="character-modal__info">
             <div className="character-modal__details">
               <p>
-                <strong>Planet:</strong> {character.origin.name}
+                <strong>Status:</strong> {character.status || "?"}
               </p>
               <p>
-                <strong>Status:</strong> {character.status}
+                <strong>Species:</strong> {character.species || "?"}
               </p>
               <p>
-                <strong>Species:</strong> {character.species}
+                <strong>Type:</strong> {character.type || "?"}
               </p>
               <p>
-                <strong>Location:</strong> {character.location.name}
+                <strong>Gender:</strong> {character.gender || "?"}
+              </p>
+              <p>
+                <strong>Location:</strong> {character.location.name || "?"}
               </p>
             </div>
 

@@ -48,7 +48,7 @@ const FavoritesPage = () => {
       <Navbar />
       <div className="content">
         <div className="fav__title">
-          <h1>Rick and Morty characters</h1>
+          <h1>My Rick and Morty favourite characters</h1>
         </div>
         <div className="fav__character_list">
           {favCharacters.length > 0 ? (

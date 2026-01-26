@@ -1,6 +1,7 @@
 import emptyHeartImage from "../../assets/images/empty-heart.png";
 import fullHeartImage from "../../assets/images/full-heart.png";
 import { useFavorites } from "../../hooks/useFavorites";
+import "./FavoriteButton.scss";
 
 const FavoriteButton = ({ character }) => {
   const { toggleFavorite, isFavorite } = useFavorites();
