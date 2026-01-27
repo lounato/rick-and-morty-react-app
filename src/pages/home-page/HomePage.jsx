@@ -4,18 +4,25 @@ import useFetch from "../../hooks/useFetch";
 import CharacterList from "../../components/character-list/CharacterList";
 import ReactPaginate from "react-paginate";
 import CharacterModal from "../../components/character-modal/CharacterModal";
-import SearchBar from "../../components/searchbar/SearchBar";
+import { useFilters } from "../../hooks/useFilters";
+import Filters from "../../components/filters/Filters";
 
 const HomePage = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchTerm, setSearchTerm] = useState("");
+  const { nameFilter, speciesFilter, statusFilter, filterType } = useFilters();
   const [selectedCharacter, setSelectedCharacter] = useState(null);
 
-  const apiUrl = searchTerm
-    ? `https://rickandmortyapi.com/api/character/?name=${searchTerm}&page=${currentPage}`
-    : `https://rickandmortyapi.com/api/character?page=${currentPage}`;
+  const buildApiUrl = () => {
+    const params = new URLSearchParams({ page: currentPage });
+    if (filterType === "name" && nameFilter) params.set("name", nameFilter);
+    if (filterType === "species" && speciesFilter)
+      params.set("species", speciesFilter);
+    if (filterType === "status" && statusFilter)
+      params.set("status", statusFilter);
+    return `https://rickandmortyapi.com/api/character/?${params.toString()}`;
+  };
 
-  const { data, error } = useFetch(apiUrl);
+  const { data, error } = useFetch(buildApiUrl());
 
   const characters = data?.results || [];
 
@@ -40,15 +47,7 @@ const HomePage = () => {
         <div className="home__title">
           <h1>Rick and Morty characters</h1>
         </div>
-        <div className="home__searchbar">
-          <SearchBar
-            searchTerm={searchTerm}
-            setSearchTerm={(term) => {
-              setSearchTerm(term);
-              setCurrentPage(1);
-            }}
-          />
-        </div>
+        <Filters setCurrentPage={setCurrentPage} />
         <div className="home__character_list">
           {characters.length > 0 && !error ? (
             <CharacterList

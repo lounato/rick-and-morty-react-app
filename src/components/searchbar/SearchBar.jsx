@@ -1,16 +1,24 @@
 import "./SearchBar.scss";
 
-const SearchBar = ({ searchTerm, setSearchTerm }) => {
+const SearchBar = ({
+  searchTerm,
+  setSearchTerm,
+  placeholder = "Search...",
+}) => {
+  const handleChange = (e) => setSearchTerm(e.target.value);
+
+  const handleSubmit = (e) => e.preventDefault();
+
   return (
-    <form className="searchbar" onSubmit={(e) => e.preventDefault()}>
+    <form className="searchbar" onSubmit={handleSubmit}>
       <input
         type="text"
-        placeholder="Search character"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
         className="searchbar__input"
+        placeholder={placeholder}
+        value={searchTerm}
+        onChange={handleChange}
       />
-      <button className="searchbar__button" type="submit">
+      <button type="submit" className="searchbar__button">
         Search
       </button>
     </form>
