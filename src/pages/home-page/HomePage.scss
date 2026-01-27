@@ -13,7 +13,13 @@
 .home__title {
   display: flex;
   justify-content: center;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
+}
+
+.home__searchbar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
 }
 
 .pagination {

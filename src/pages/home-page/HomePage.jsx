@@ -4,19 +4,22 @@ import useFetch from "../../hooks/useFetch";
 import CharacterList from "../../components/character-list/CharacterList";
 import ReactPaginate from "react-paginate";
 import CharacterModal from "../../components/character-modal/CharacterModal";
+import SearchBar from "../../components/searchbar/SearchBar";
 
 const HomePage = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
   const [selectedCharacter, setSelectedCharacter] = useState(null);
 
-  const { data, loading, error } = useFetch(
-    `https://rickandmortyapi.com/api/character?page=${currentPage}`,
-  );
+  const apiUrl = searchTerm
+    ? `https://rickandmortyapi.com/api/character/?name=${searchTerm}&page=${currentPage}`
+    : `https://rickandmortyapi.com/api/character?page=${currentPage}`;
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  const { data, error } = useFetch(apiUrl);
 
   const characters = data?.results || [];
+
+  const pagesCount = data?.info?.pages;
 
   const handlePageClick = (selectedItem) => {
     const nextPage = selectedItem.selected + 1;
@@ -37,14 +40,30 @@ const HomePage = () => {
         <div className="home__title">
           <h1>Rick and Morty characters</h1>
         </div>
-        <div className="home__character_list">
-          <CharacterList characters={characters} onCharacterClick={openModal} />
+        <div className="home__searchbar">
+          <SearchBar
+            searchTerm={searchTerm}
+            setSearchTerm={(term) => {
+              setSearchTerm(term);
+              setCurrentPage(1);
+            }}
+          />
         </div>
-        {data?.info?.pages > 0 && (
+        <div className="home__character_list">
+          {characters.length > 0 && !error ? (
+            <CharacterList
+              characters={characters}
+              onCharacterClick={openModal}
+            />
+          ) : (
+            <p>Nobody is here...</p>
+          )}
+        </div>
+        {pagesCount > 0 && (
           <ReactPaginate
             previousLabel={"← Previous"}
             nextLabel={"Next →"}
-            pageCount={Math.ceil(data?.info?.pages || 0)}
+            pageCount={pagesCount}
             forcePage={currentPage === 1 ? 0 : currentPage - 1}
             marginPagesDisplayed={2}
             pageRangeDisplayed={3}

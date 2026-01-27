@@ -16,7 +16,7 @@ const FavoritesPage = () => {
       ? `https://rickandmortyapi.com/api/character/${favorites.join(",")}`
       : null;
 
-  const { data, loading, error } = useFetch(favoritesUrl);
+  const { data, error } = useFetch(favoritesUrl);
 
   const favCharacters = data
     ? data.length > 0
@@ -24,8 +24,7 @@ const FavoritesPage = () => {
       : [data] // only 1 character
     : [];
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  const pagesCount = data?.info?.pages;
 
   const handlePageClick = (selectedItem) => {
     const nextPage = selectedItem.selected + 1;
@@ -49,7 +48,7 @@ const FavoritesPage = () => {
           <h1>My Rick and Morty favourite characters</h1>
         </div>
         <div className="fav__character_list">
-          {favCharacters.length > 0 ? (
+          {favCharacters.length > 0 && !error ? (
             <CharacterList
               characters={favCharacters}
               onCharacterClick={openModal}
@@ -58,11 +57,11 @@ const FavoritesPage = () => {
             <p>No favorites yet :(</p>
           )}
         </div>
-        {favCharacters.length > data?.info?.pages && (
+        {favCharacters.length > pagesCount && (
           <ReactPaginate
             previousLabel={"← Previous"}
             nextLabel={"Next →"}
-            pageCount={Math.ceil(data?.info?.pages || 0)}
+            pageCount={pagesCount}
             forcePage={currentPage === 1 ? 0 : currentPage - 1}
             marginPagesDisplayed={2}
             pageRangeDisplayed={3}
