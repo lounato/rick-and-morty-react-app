@@ -27,7 +27,7 @@ const Filters = ({ setCurrentPage }) => {
 
   const handleSearch = (term) => {
     setFilterValue[filterType](term);
-    setCurrentPage(1); // reiniciar paginación al cambiar filtro
+    setCurrentPage(1); // reset paging when changing filter
   };
 
   return (
